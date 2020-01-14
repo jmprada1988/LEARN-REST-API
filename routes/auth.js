@@ -44,7 +44,7 @@ router.put(
   ],
   authenticationController.signup
 );
-
+router.post('/login', authenticationController.login);
 
 
 module.exports = router;
