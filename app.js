@@ -9,12 +9,11 @@ const app = express();
 
 const URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0-kl2sv.mongodb.net/${process.env.DEFAULT_DB}`
 
-console.log(URI)
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
 });
 
 app.use(bodyParser.json());
@@ -23,11 +22,19 @@ app.use('/auth', authenticationRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({
+    message,
+    data,
+  });
 });
 
 mongoose.connect(
   URI
 ).then(result => {
-  console.log('Connection Stablished with mongo cluster');
-  app.listen(process.env.PORT || 4000);
+  const $PORT = process.env.ENVIRONMENT === 'dev' ? 4000 : 8000
+  console.log('Connection Stablished with mongo cluster \nListening at port: '+ $PORT +'...');
+  app.listen($PORT);
 })
