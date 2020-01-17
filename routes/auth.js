@@ -21,14 +21,22 @@ router.put(
         } catch (err) {
           console.log(err);
         }
-      })
-      .normalizeEmail(),
+      }),
     body('password')
       .trim()
       .isLength({ min: 5 })
       .withMessage('Contraseña debe tener mínimo 8 caracteres.')
       .matches(/\d/)
       .withMessage('Contraseña debe tener un número'),
+    body('confirmPassword')
+      .trim()
+      .custom((value, {req}) => {
+        if (value !== req.body.password) {
+          throw new Error('La confirmacion de la contraseña no es igual a la ingresada arriba.');
+        };
+        return true;
+      })
+    ,
     body('name')
       .trim()
       .not()
@@ -44,6 +52,7 @@ router.put(
   ],
   authenticationController.signup
 );
+router.get('/verifyAccount', authenticationController.verifyAccount);
 router.post('/login', authenticationController.login);
 
 

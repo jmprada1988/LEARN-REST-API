@@ -52,7 +52,7 @@ const userSchema = new Schema({
   },
   status: {
     type: String,
-    default: 'Active'
+    default: 'Not Verified'
   },
   course_certificates: [
     {
@@ -65,7 +65,10 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Program'
     }
-  ]
+  ],
+  verifyToken: {
+    type: String
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);
