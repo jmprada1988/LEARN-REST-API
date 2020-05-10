@@ -423,7 +423,7 @@ exports.login = async (req, res, next) => {
       process.env.JWT,
       { expiresIn: '2h' }
     );
-    res.status(200).json({ token, userId: userSaved._id.toString() });
+    res.status(200).json({ token, user: {userId: userSaved._id.toString(), name: user.name} });
     return;
   } catch (err) {
     if (!err.statusCode) {
