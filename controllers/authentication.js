@@ -384,7 +384,8 @@ exports.signup = async (req, res, next) => {
 </body></html>
       `
     });
-    res.status(201).json({ message: 'Usuario Creado', userId: result._id });
+    res.status(201).json({ message: 'Usuario Creado, Confirma tu correo para terminar el proceso', userId: result._id });
+    return;
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -448,6 +449,7 @@ exports.verifyAccount = async (req, res, next) => {
       user.status = 'Active';
       const result = await user.save();
       res.status(200).json({message: 'Cuenta Verificada.', user: result});
+      return;
     }
   } catch (err) {
     if (!err.statusCode) {
