@@ -211,13 +211,13 @@ exports.signup = async (req, res, next) => {
   </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="bff8ffa1-41a9-4aab-a2ea-52ac3767c6f4">
     <tbody>
       <tr>
-        <td style="padding:18px 30px 18px 30px; line-height:40px; text-align:inherit; background-color:#dde6de;" height="100%" valign="top" bgcolor="#dde6de" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="color: #6fab81; font-size: 40px; font-family: inherit">Thank you for downloading the app! Now what?</span></div><div></div></div></td>
+        <td style="padding:18px 30px 18px 30px; line-height:40px; text-align:inherit; background-color:#dde6de;" height="100%" valign="top" bgcolor="#dde6de" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="color: #6fab81; font-size: 40px; font-family: inherit">Gracias Por registrarte en Latam Learning Center Que sigue?</span></div><div></div></div></td>
       </tr>
     </tbody>
   </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="2f94ef24-a0d9-4e6f-be94-d2d1257946b0">
     <tbody>
       <tr>
-        <td style="padding:18px 50px 18px 50px; line-height:22px; text-align:inherit; background-color:#dde6de;" height="100%" valign="top" bgcolor="#dde6de" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="font-size: 16px; font-family: inherit">Confirm your email address to start managing your finances on Fractal.&nbsp;</span></div><div></div></div></td>
+        <td style="padding:18px 50px 18px 50px; line-height:22px; text-align:inherit; background-color:#dde6de;" height="100%" valign="top" bgcolor="#dde6de" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="font-size: 16px; font-family: inherit">Confirma Tu correo para empezar tu aprendizaje en LLC.&nbsp;</span></div><div></div></div></td>
       </tr>
     </tbody>
   </table><table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="c7bd4768-c1ab-4c64-ba24-75a9fd6daed8">
@@ -424,7 +424,7 @@ exports.login = async (req, res, next) => {
       process.env.JWT,
       { expiresIn: '2h' }
     );
-    res.status(200).json({ token, user: {userId: userSaved._id.toString(), name: user.name} });
+    res.status(200).json({ token, user: {userId: userSaved._id.toString(), name: user.name, role: user.role} });
     return;
   } catch (err) {
     if (!err.statusCode) {
